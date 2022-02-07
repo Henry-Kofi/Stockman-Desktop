@@ -17,3 +17,11 @@
 .primary-yellow {
     -fx-background-color: #FFBE0B;
 }
+
+.navigation-button {
+     -fx-background-color: #8338EC;
+}
+
+.navigation-button:hover {
+    -fx-background-color: #3A86FF;
+}
