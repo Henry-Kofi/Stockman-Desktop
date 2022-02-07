@@ -25,3 +25,12 @@
 .navigation-button:hover {
     -fx-background-color: #3A86FF;
 }
+
+.heading-button {
+    -fx-background-color: #FB5607;
+}
+
+.heading-button:hover {
+     -fx-background-color: #3A86FF
+}
+
