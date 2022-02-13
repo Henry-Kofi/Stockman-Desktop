@@ -6,6 +6,9 @@ import javafx.stage.Window;
 import java.sql.*;
 
 public class Utility {
+
+    // TODO - change database
+
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/blueschema?useSSL=false";
     private static final String DATABASE_USERNAME = "root";
     private static final String DATABASE_PASSWORD = "2024";
