@@ -6,15 +6,13 @@ import javafx.stage.Window;
 import java.sql.*;
 
 public class Utility {
-
-    // TODO - change database
-
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/stockman?useSSL=false";
     private static final String DATABASE_USERNAME = "root";
     private static final String DATABASE_PASSWORD = "2024";
 
-
     private static final String SELECT_LOGIN_QUERY_FROM_STAFF = "SELECT * FROM stockman.user WHERE username = ? and password = ?";
+
+    public static User loggedInUser = new User();
 
     public static boolean validateLoginCredentials(final String username, final String password) {
 
@@ -30,6 +28,14 @@ public class Utility {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
+                loggedInUser.setUserID(resultSet.getInt("userID"));
+                loggedInUser.setFullName(resultSet.getString("fullName"));
+                loggedInUser.setUsername(resultSet.getString("username"));
+                loggedInUser.setPassword(resultSet.getString("password"));
+
+                // debug
+                System.out.println(loggedInUser.getFullName() + " with ID " + loggedInUser.getUserID() + " has logged in");
+
                 return true;
             }
 

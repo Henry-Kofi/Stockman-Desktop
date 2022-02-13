@@ -6,17 +6,16 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1166.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutX="33.0" layoutY="21.0" prefHeight="100.0" prefWidth="1100.0" styleClass="primary-orange" stylesheets="@css/style.css" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="21.0">
+      <AnchorPane layoutX="33.0" layoutY="21.0" prefHeight="100.0" prefWidth="1100.0" styleClass="primary-violet" stylesheets="@css/style.css" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="21.0">
          <children>
             <TextField layoutX="400.0" layoutY="30.0" prefHeight="40.0" prefWidth="300.0" promptText="Search Product By Name" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="30.0">
                <font>
                   <Font name="Articulate" size="15.0" />
                </font>
             </TextField>
-            <JFXButton layoutX="700.0" layoutY="30.0" prefHeight="40.0" prefWidth="70.0" styleClass="heading-button" stylesheets="@css/style.css" text="Search" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="700.0" AnchorPane.topAnchor="30.0">
+            <JFXButton layoutX="700.0" layoutY="30.0" prefHeight="40.0" prefWidth="70.0" styleClass="navigation-button" stylesheets="@css/style.css" text="Search" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="700.0" AnchorPane.topAnchor="30.0">
                <font>
                   <Font name="Articulate" size="15.0" />
                </font>
