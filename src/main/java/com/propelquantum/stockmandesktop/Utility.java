@@ -9,12 +9,12 @@ public class Utility {
 
     // TODO - change database
 
-    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/blueschema?useSSL=false";
+    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/stockman?useSSL=false";
     private static final String DATABASE_USERNAME = "root";
     private static final String DATABASE_PASSWORD = "2024";
 
 
-    private static final String SELECT_LOGIN_QUERY_FROM_STAFF = "SELECT * FROM blueschema.staff WHERE username = ? and password = ?";
+    private static final String SELECT_LOGIN_QUERY_FROM_STAFF = "SELECT * FROM stockman.user WHERE username = ? and password = ?";
 
     public static boolean validateLoginCredentials(final String username, final String password) {
 
