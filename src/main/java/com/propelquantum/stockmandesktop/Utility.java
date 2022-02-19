@@ -6,11 +6,12 @@ import javafx.stage.Window;
 import java.sql.*;
 
 public class Utility {
-    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/stockman?useSSL=false";
-    private static final String DATABASE_USERNAME = "root";
-    private static final String DATABASE_PASSWORD = "2024";
+    public static final String DATABASE_URL = "jdbc:mysql://localhost:3306/stockman?useSSL=false";
+    public static final String DATABASE_USERNAME = "root";
+    public static final String DATABASE_PASSWORD = "2024";
 
-    private static final String SELECT_LOGIN_QUERY_FROM_STAFF = "SELECT * FROM stockman.user WHERE username = ? and password = ?";
+    public static final String SELECT_LOGIN_QUERY_FROM_STAFF = "SELECT * FROM stockman.user WHERE username = ? and password = ?";
+    public static final String SEARCH_ALL_CUSTOMER_QUERY = "SELECT * FROM stockman.customer";
 
     public static User loggedInUser = new User();
 
