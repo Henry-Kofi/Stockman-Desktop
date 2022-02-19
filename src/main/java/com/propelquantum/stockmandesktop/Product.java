@@ -7,7 +7,7 @@ public class Product {
     private final StringProperty productName;
     private final StringProperty productDescription;
     private final DoubleProperty pricePerUnit;
-    private final DoubleProperty quantityInStock;
+    private final IntegerProperty quantityInStock;
     private final DoubleProperty totalAmount;
 
     Product() {
@@ -15,25 +15,25 @@ public class Product {
         productName = new SimpleStringProperty();
         productDescription = new SimpleStringProperty();
         pricePerUnit = new SimpleDoubleProperty();
-        quantityInStock = new SimpleDoubleProperty();
+        quantityInStock = new SimpleIntegerProperty();
         totalAmount = new SimpleDoubleProperty();
     }
 
-    Product(int id, String name, String describe, double price, double quantity, double amount) {
+    Product(int id, String name, String describe, double price, int quantity, double amount) {
         productID = new SimpleIntegerProperty(id);
         productName = new SimpleStringProperty(name);
         productDescription = new SimpleStringProperty(describe);
         pricePerUnit = new SimpleDoubleProperty(price);
-        quantityInStock = new SimpleDoubleProperty(quantity);
+        quantityInStock = new SimpleIntegerProperty(quantity);
         totalAmount = new SimpleDoubleProperty(amount);
     }
 
-    Product(String name, String describe, double price, double quantity) {
+    Product(String name, String describe, double price, int quantity) {
         productID = new SimpleIntegerProperty();
         productName = new SimpleStringProperty(name);
         productDescription = new SimpleStringProperty(describe);
         pricePerUnit = new SimpleDoubleProperty(price);
-        quantityInStock = new SimpleDoubleProperty(quantity);
+        quantityInStock = new SimpleIntegerProperty(quantity);
 
         totalAmount = new SimpleDoubleProperty(pricePerUnit.get() * quantityInStock.get());
     }
@@ -54,8 +54,12 @@ public class Product {
         pricePerUnit.set(price);
     }
 
-    public void setQuantityInStock(final double quantity) {
+    public void setQuantityInStock(final int quantity) {
         quantityInStock.set(quantity);
+    }
+
+    public void setTotalAmount() {
+        totalAmount.set(getTotalAmount());
     }
 
     public int getProductID() {
@@ -74,7 +78,7 @@ public class Product {
         return pricePerUnit.get();
     }
 
-    public double getQuantityInStock() {
+    public int getQuantityInStock() {
         return quantityInStock.get();
     }
 
@@ -101,7 +105,7 @@ public class Product {
         return pricePerUnit;
     }
 
-    public DoubleProperty quantityInStock() {
+    public IntegerProperty quantityInStock() {
         return quantityInStock;
     }
 
