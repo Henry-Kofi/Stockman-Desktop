@@ -29,6 +29,8 @@ public class CustomerController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+        customers.clear();
+
         idTableColumn.setCellValueFactory(cellData -> cellData.getValue().customerID());
         fullNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().customerName());
         companyOrLocationTableColumn.setCellValueFactory(cellData -> cellData.getValue().locationOrCompanyName());
