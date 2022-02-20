@@ -44,7 +44,8 @@
                   <Font name="Articulate" size="15.0" />
                </font>
             </JFXButton>
-         </children></AnchorPane>
+         </children>
+      </AnchorPane>
       <AnchorPane fx:id="contentArea" prefHeight="768.0" prefWidth="1166.0" />
    </children>
 </HBox>
