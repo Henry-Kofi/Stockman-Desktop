@@ -1,8 +1,11 @@
 package com.propelquantum.stockmandesktop;
 
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -10,6 +13,8 @@ public class AddProductDialog {
     private static String name;
     private static String description;
     private static double price;
+
+    private static int defaultQuantity = 0;
 
     public static void show() {
         Stage stage = new Stage();
@@ -61,7 +66,26 @@ public class AddProductDialog {
             System.out.println("The value of name is: " + name);
             System.out.println("The value of description is: " + description);
             System.out.println("The value of price is: " + price);
+
+            Product product = new Product(name, description, price, defaultQuantity);
+
+            if (Utility.insertProductIntoDatabase(product)) {
+
+            }
+
+            stage.close();
         });
+
+        VBox vBox = new VBox();
+        vBox.setPadding(new Insets(20, 20, 20, 20));
+        vBox.setSpacing(10);
+
+        vBox.getChildren().addAll(productName, productDescription, productPrice, button);
+
+        Scene scene = new Scene(vBox, 350, 200);
+        stage.setTitle("Add a product");
+        stage.setScene(scene);
+        stage.showAndWait();
 
     }
 }
