@@ -55,6 +55,19 @@ public class AddCustomerDialog {
                 return;
             }
 
+            System.out.println("The value of name is: " + name);
+            System.out.println("The value of location is: " + location);
+            System.out.println("The value of telephone is: " + tel);
+
+            Customer customer = new Customer(name, location, tel);
+            customer.setLastPurchasedDate("not given");
+
+            System.out.println(customer.getLastPurchasedDate());
+
+            if (Utility.insertCustomerIntoDatabase(customer)) {
+                Utility.informationDisplay("Customer successfully added!", null, "New Customer Added");
+            }
+
             stage.close();
         });
 

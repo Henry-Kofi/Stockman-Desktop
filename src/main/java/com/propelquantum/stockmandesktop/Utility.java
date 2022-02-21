@@ -16,6 +16,8 @@ public class Utility {
     public static final String SEARCH_ALL_PRODUCT_QUERY = "SELECT * FROM stockman.product";
     public static final String SEARCH_ALL_EXPENDITURE_QUERY = "SELECT * FROM stockman.expenditure";
 
+    public static final String INSERT_CUSTOMER_UPDATE = "INSERT INTO stockman.customer(`fullName`, `locationOrCompany`, `totalAmountPurchased`, `lastPurchasedDate`, `telephone`) VALUES (?, ?, ?, ?, ?)";
+
     public static User loggedInUser = new User();
 
     public static boolean validateLoginCredentials(final String username, final String password) {
@@ -42,6 +44,30 @@ public class Utility {
 
                 return true;
             }
+
+        } catch(SQLException e) {
+            printSQLException(e);
+        }
+
+        return false;
+    }
+
+    public static boolean insertCustomerIntoDatabase(final Customer customer) {
+        try(Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CUSTOMER_UPDATE)) {
+
+            preparedStatement.setString(1, customer.getCustomerName());
+            preparedStatement.setString(2, customer.getLocationOrCompanyName());
+            preparedStatement.setDouble(3, customer.getTotalAmountPurchased());
+            preparedStatement.setString(4, customer.getLastPurchasedDate());
+            preparedStatement.setString(5, customer.getTelephone());
+
+            // debug
+            System.out.println(preparedStatement);
+
+            preparedStatement.executeUpdate();
+
+            return true;
 
         } catch(SQLException e) {
             printSQLException(e);
