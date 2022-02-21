@@ -14,7 +14,7 @@ public class AddProductDialog {
     private static String description;
     private static double price;
 
-    private static int defaultQuantity = 0;
+    private static final int defaultQuantity = 0;
 
     public static void show() {
         Stage stage = new Stage();
@@ -45,6 +45,7 @@ public class AddProductDialog {
                 System.out.println("Error parsing price string to double: " + ne);
 
                 Utility.showAlert(Alert.AlertType.ERROR, null, "Product Addition Error!", "The price is in the wrong format");
+                return;
             }
 
 
@@ -70,7 +71,7 @@ public class AddProductDialog {
             Product product = new Product(name, description, price, defaultQuantity);
 
             if (Utility.insertProductIntoDatabase(product)) {
-
+                Utility.informationDisplay("Product successfully added!", null, "New product Added");
             }
 
             stage.close();
