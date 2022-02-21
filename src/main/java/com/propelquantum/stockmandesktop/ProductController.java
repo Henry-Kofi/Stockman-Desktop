@@ -64,6 +64,7 @@ public class ProductController implements Initializable {
     }
 
     public void onAddProductButtonClicked(ActionEvent actionEvent) {
+        AddProductDialog.show();
     }
 
     public void onSearchButtonClicked(ActionEvent actionEvent) {
