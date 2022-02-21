@@ -4,9 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.sql.*;
@@ -63,6 +61,25 @@ public class CustomerController implements Initializable {
     }
 
     public void onAddCustomerButtonClicked(ActionEvent actionEvent) {
+        Dialog<String> dialog = new Dialog<>();
+        ButtonType buttonType = new ButtonType("Add", ButtonBar.ButtonData.APPLY);
+
+        dialog.setTitle("Add a customer");
+        dialog.setContentText("Track your customers for better customer services by adding them to your system");
+
+        dialog.getDialogPane().getButtonTypes().add(buttonType);
+
+        TextField customerFullName = new TextField();
+        customerFullName.setPromptText("Enter the customer's full name here");
+
+        TextField locationOrCompany = new TextField();
+        locationOrCompany.setPromptText("Enter the customer's location or company");
+
+        TextField telephone = new TextField();
+        telephone.setPromptText("Enter the customer's telephone number");
+
+        
+
     }
 
     public void onSearchButtonClicked(ActionEvent actionEvent) {
