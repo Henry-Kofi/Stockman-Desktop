@@ -17,6 +17,7 @@ public class Utility {
     public static final String SEARCH_ALL_EXPENDITURE_QUERY = "SELECT * FROM stockman.expenditure";
 
     public static final String INSERT_CUSTOMER_UPDATE = "INSERT INTO stockman.customer(`fullName`, `locationOrCompany`, `totalAmountPurchased`, `lastPurchasedDate`, `telephone`) VALUES (?, ?, ?, ?, ?)";
+    public static final String INSERT_PRODUCT_UPDATE = "INSERT INTO stockman.product(`productName`, `productDescription`, `pricePerUnit`, `quantityInStock`, `totalAmount`) VALUES (?, ?, ?, ?, ?)";
 
     public static User loggedInUser = new User();
 
@@ -76,6 +77,30 @@ public class Utility {
         return false;
     }
 
+    public static boolean insertProductIntoDatabase(Product product) {
+        try(Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_PRODUCT_UPDATE)) {
+
+            preparedStatement.setString(1, product.getProductName());
+            preparedStatement.setString(2, product.getProductDescription());
+            preparedStatement.setDouble(3, product.getPricePerUnit());
+            preparedStatement.setInt(4, product.getQuantityInStock());
+            preparedStatement.setDouble(5, product.getTotalAmount());
+
+            // debug
+            System.out.println(preparedStatement);
+
+            preparedStatement.executeUpdate();
+
+            return true;
+
+        } catch(SQLException e) {
+            printSQLException(e);
+        }
+
+        return false;
+    }
+
     public static void informationDisplay(final String message, final String header, final String title) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 
@@ -110,4 +135,6 @@ public class Utility {
             }
         }
     }
+
+
 }
