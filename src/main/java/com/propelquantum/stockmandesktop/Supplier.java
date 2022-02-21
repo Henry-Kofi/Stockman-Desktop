@@ -28,6 +28,15 @@ public class Supplier {
         telephone = new SimpleStringProperty(tel);
     }
 
+    Supplier(String name, String location, String product, double price, String tel) {
+        supplierID = new SimpleIntegerProperty();
+        supplierName = new SimpleStringProperty(name);
+        supplierLocation = new SimpleStringProperty(location);
+        productsSupplied = new SimpleStringProperty(product);
+        pricePerUnit = new SimpleDoubleProperty(price);
+        telephone = new SimpleStringProperty(tel);
+    }
+
     public void setSupplierID(final int id) {
         supplierID.set(id);
     }

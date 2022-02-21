@@ -64,6 +64,7 @@ public class SupplierController implements Initializable {
     }
 
     public void onAddSupplierButtonClicked(ActionEvent actionEvent) {
+        AddSupplierDialog.show();
     }
 
     public void onSearchButtonClicked(ActionEvent actionEvent) {

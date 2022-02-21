@@ -61,6 +61,7 @@ public class ExpenditureController implements Initializable {
     }
 
     public void onAddExpenseButtonClicked(ActionEvent actionEvent) {
+        AddExpenditureDialog.show();
     }
 
     public void onSearchButtonClicked(ActionEvent actionEvent) {

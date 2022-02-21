@@ -19,6 +19,7 @@ public class Utility {
     public static final String INSERT_CUSTOMER_UPDATE = "INSERT INTO stockman.customer(`fullName`, `locationOrCompany`, `totalAmountPurchased`, `lastPurchasedDate`, `telephone`) VALUES (?, ?, ?, ?, ?)";
     public static final String INSERT_PRODUCT_UPDATE = "INSERT INTO stockman.product(`productName`, `productDescription`, `pricePerUnit`, `quantityInStock`, `totalAmount`) VALUES (?, ?, ?, ?, ?)";
     public static final String INSERT_EXPENDITURE_UPDATE = "INSERT INTO stockman.expenditure(`expenses`, `description`, `amount`, `dateOfExpenditure`, `customerID`) VALUES (?, ?, ?, ?, ?)";
+    public static final String INSERT_SUPPLIER_UPDATE = "INSERT INTO stockman.supplier(`supplierName`, `location`, `productsSupplied`, `pricePerUnit`, `telephone`) VALUES (?, ?, ?, ?, ?)";
 
     public static User loggedInUser = new User();
 
@@ -111,6 +112,30 @@ public class Utility {
             preparedStatement.setDouble(3, expenditure.getAmount());
             preparedStatement.setString(4, expenditure.getDateOfExpenditure());
             preparedStatement.setInt(5, expenditure.getCustomerID());
+
+            // debug
+            System.out.println(preparedStatement);
+
+            preparedStatement.executeUpdate();
+
+            return true;
+
+        } catch(SQLException e) {
+            printSQLException(e);
+        }
+
+        return false;
+    }
+
+    public static boolean insertSupplierIntoDatabase(Supplier supplier) {
+        try(Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SUPPLIER_UPDATE)) {
+
+            preparedStatement.setString(1, supplier.getSupplierName());
+            preparedStatement.setString(2, supplier.getSupplierLocation());
+            preparedStatement.setString(3, supplier.getProductsSupplied());
+            preparedStatement.setDouble(4, supplier.getPricePerUnit());
+            preparedStatement.setString(5, supplier.getTelephone());
 
             // debug
             System.out.println(preparedStatement);

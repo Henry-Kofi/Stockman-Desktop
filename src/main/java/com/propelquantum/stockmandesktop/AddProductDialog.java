@@ -22,7 +22,7 @@ public class AddProductDialog {
         stage.setResizable(false);
 
         TextField productName = new TextField();
-        productName.setPromptText("Enter the name of the name");
+        productName.setPromptText("Enter the name of the product");
         productName.setMinHeight(30);
 
         TextField productDescription = new TextField();
