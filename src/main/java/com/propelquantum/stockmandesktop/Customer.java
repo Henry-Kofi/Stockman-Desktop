@@ -19,6 +19,15 @@ public class Customer {
         telephone = new SimpleStringProperty();
     }
 
+    Customer(String name, String locationOrCompany, String tel) {
+        customerID = new SimpleIntegerProperty();
+        customerName = new SimpleStringProperty(name);
+        locationOrCompanyName = new SimpleStringProperty(locationOrCompany);
+        totalAmountPurchased = new SimpleDoubleProperty();
+        lastPurchasedDate = new SimpleStringProperty();
+        telephone = new SimpleStringProperty(tel);
+    }
+
     Customer(int id, String name, String locationOrCompany, double amount, String date, String tel) {
         customerID = new SimpleIntegerProperty(id);
         customerName = new SimpleStringProperty(name);

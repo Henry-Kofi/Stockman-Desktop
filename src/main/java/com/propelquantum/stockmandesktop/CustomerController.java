@@ -63,7 +63,7 @@ public class CustomerController implements Initializable {
     }
 
     public void onAddCustomerButtonClicked(ActionEvent actionEvent) {
-
+        AddCustomerDialog.show();
     }
 
     public void onSearchButtonClicked(ActionEvent actionEvent) {
