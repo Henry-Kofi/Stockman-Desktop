@@ -23,7 +23,7 @@ public class ProductController implements Initializable {
     public TableColumn<Product, Number> quantityInStockTableColumn = new TableColumn<>();
     public TableColumn<Product, Number> totalAmountTableColumn = new TableColumn<>();
 
-    public static ObservableList<Product> products = FXCollections.observableArrayList();
+    public static ObservableList<Product> products = FXCollections.observableArrayList(Main2Controller.productsOnLaunch);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

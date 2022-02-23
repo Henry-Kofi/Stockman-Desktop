@@ -10,10 +10,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-
 public class AddSupplierDialog {
     private static String name;
     private static String location;
@@ -38,7 +34,14 @@ public class AddSupplierDialog {
         supplierTelephone.setPromptText("What is the supplier's telephone number");
         supplierTelephone.setMinHeight(30);
 
-        ComboBox<Product> products = new ComboBox<>(ProductController.products);
+        ComboBox<Product> products;
+
+        if (Main2Controller.productsOnLaunch.size() > ProductController.products.size()) {
+            products = new ComboBox<>(Main2Controller.productsOnLaunch);
+        } else {
+            products = new ComboBox<>(ProductController.products);
+        }
+
         ComboBox<String> productNames = new ComboBox<>();
 
         for (Product product : products.getItems()) {

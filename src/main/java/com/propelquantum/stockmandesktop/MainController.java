@@ -1,5 +1,7 @@
 package com.propelquantum.stockmandesktop;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.*;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -24,6 +27,7 @@ public class MainController implements Initializable {
         } catch (IOException e) {
             Utility.showAlert(Alert.AlertType.ERROR, null, "Fatal Error!", "Contact application developer");
         }
+
     }
 
     public void onDashboardButtonClicked(ActionEvent actionEvent) throws IOException {

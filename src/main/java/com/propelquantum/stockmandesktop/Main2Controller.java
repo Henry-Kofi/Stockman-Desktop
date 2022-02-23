@@ -1,5 +1,7 @@
 package com.propelquantum.stockmandesktop;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,13 +11,13 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.*;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class Main2Controller implements Initializable {
-
-
     public BorderPane borderPane;
+    public static ObservableList<Product> productsOnLaunch = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -24,6 +26,27 @@ public class Main2Controller implements Initializable {
             borderPane.setCenter(fxml);
         } catch (IOException e) {
             Utility.showAlert(Alert.AlertType.ERROR, null, "Fatal Error!", "Contact application developer");
+        }
+
+        try(Connection connection = DriverManager.getConnection(Utility.DATABASE_URL, Utility.DATABASE_USERNAME, Utility.DATABASE_PASSWORD);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(Utility.SEARCH_ALL_PRODUCT_QUERY)) {
+
+            while (resultSet.next()) {
+                Product product = new Product();
+
+                product.setProductID(resultSet.getInt("productID"));
+                product.setProductName(resultSet.getString("productName"));
+                product.setProductDescription(resultSet.getString("productDescription"));
+                product.setPricePerUnit(resultSet.getInt("pricePerUnit"));
+                product.setQuantityInStock(resultSet.getInt("quantityInStock"));
+                product.setTotalAmount();
+
+                productsOnLaunch.add(product);
+            }
+
+        } catch (SQLException e) {
+            Utility.printSQLException(e);
         }
     }
     
