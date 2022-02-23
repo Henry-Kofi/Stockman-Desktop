@@ -48,13 +48,18 @@ public class Main2Controller implements Initializable {
         borderPane.setCenter(fxml);
     }
 
-    public void onSuppliersButtonClicked(ActionEvent actionEvent) {
+    public void onSuppliersButtonClicked(ActionEvent actionEvent) throws IOException {
+        Parent fxml = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("supplier.fxml")));
+        borderPane.setCenter(fxml);
     }
 
-    public void onExpenditureButtonClicked(ActionEvent actionEvent) {
+    public void onExpenditureButtonClicked(ActionEvent actionEvent) throws IOException {
+        Parent fxml = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("expenditure.fxml")));
+        borderPane.setCenter(fxml);
     }
 
-    public void onSettingsButtonClicked(ActionEvent actionEvent) {
+    public void onSettingsButtonClicked(ActionEvent actionEvent) throws IOException {
+        Parent fxml = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("settings.fxml")));
     }
 
     
