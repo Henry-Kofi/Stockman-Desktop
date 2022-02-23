@@ -60,6 +60,7 @@ public class Main2Controller implements Initializable {
 
     public void onSettingsButtonClicked(ActionEvent actionEvent) throws IOException {
         Parent fxml = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("settings.fxml")));
+        borderPane.setCenter(fxml);
     }
 
     
