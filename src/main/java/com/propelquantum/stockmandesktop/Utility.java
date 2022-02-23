@@ -21,6 +21,8 @@ public class Utility {
     public static final String INSERT_EXPENDITURE_UPDATE = "INSERT INTO stockman.expenditure(`expenses`, `description`, `amount`, `dateOfExpenditure`, `customerID`) VALUES (?, ?, ?, ?, ?)";
     public static final String INSERT_SUPPLIER_UPDATE = "INSERT INTO stockman.supplier(`supplierName`, `location`, `productsSupplied`, `pricePerUnit`, `telephone`) VALUES (?, ?, ?, ?, ?)";
 
+    public static final String UPDATE_QUANTITY_IN_STOCK = "UPDATE stockman.product SET `quantityInStock` = ? WHERE (`productID` = ?)";
+
     public static User loggedInUser = new User();
 
     public static boolean validateLoginCredentials(final String username, final String password) {
@@ -151,6 +153,52 @@ public class Utility {
         return false;
     }
 
+    public static boolean updateQuantityInStock(int quantity) {
+        try(Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUANTITY_IN_STOCK)) {
+
+            int quantityToInsert = getQuantityInStockFromDatabase(ProductTile.id) + quantity;
+
+            preparedStatement.setInt(1, quantityToInsert);
+            preparedStatement.setInt(2, ProductTile.id);
+
+            // debug
+            System.out.println(preparedStatement);
+
+            preparedStatement.executeUpdate();
+
+            return true;
+
+        } catch(SQLException e) {
+            printSQLException(e);
+        }
+
+        return false;
+    }
+
+    public static int getQuantityInStockFromDatabase(final int productID) {
+        int quantity = 0;
+
+        try(Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(Utility.SEARCH_ALL_PRODUCT_QUERY)) {
+
+
+            while (resultSet.next()) {
+
+                if (productID == resultSet.getInt("productID")) {
+                    quantity = resultSet.getInt("quantityInStock");
+                }
+            }
+
+
+        } catch(SQLException e) {
+            printSQLException(e);
+        }
+
+        return quantity;
+    }
+
     public static void informationDisplay(final String message, final String header, final String title) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 
@@ -185,5 +233,6 @@ public class Utility {
             }
         }
     }
+
 
 }

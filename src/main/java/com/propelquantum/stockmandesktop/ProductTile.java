@@ -7,10 +7,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.TextAlignment;
 
 public class ProductTile {
     private final Pane pane;
+    private int productID = 0;
+
+    public static int id = 0;
 
     ProductTile(String nameOfProduct) {
         Label productName = new Label(nameOfProduct);
@@ -35,6 +37,13 @@ public class ProductTile {
         resupplyButton.setTextFill(Color.WHITE);
         resupplyButton.setStyle("-fx-background-color: #FF006E");
 
+        resupplyButton.setOnAction(e -> {
+            ResupplyDialog.show();
+            id = this.getProductID();
+
+            System.out.println("id is " + id);
+        });
+
         vBox.setMinSize(250, 200);
         vBox.setPadding(new Insets(30, 40, 40, 40));
         vBox.setStyle("-fx-background-color: #3A86FF");
@@ -48,6 +57,14 @@ public class ProductTile {
 
     public Pane asPane() {
         return pane;
+    }
+
+    public void setProductID(final int id) {
+        productID = id;
+    }
+
+    public int getProductID() {
+        return productID;
     }
 
 

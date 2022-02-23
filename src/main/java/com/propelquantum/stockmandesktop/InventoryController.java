@@ -5,10 +5,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.FlowPane;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class InventoryController implements Initializable {
-
     public FlowPane flowPane = new FlowPane();
 
     @Override
@@ -20,11 +20,15 @@ public class InventoryController implements Initializable {
             for (var i = 0; i < ProductController.products.size(); i++) {
                 ProductTile productTile = new ProductTile(ProductController.products.get(i).getProductName());
 
+                productTile.setProductID(ProductController.products.get(i).getProductID());
+
                 flowPane.getChildren().add(productTile.asPane());
             }
         } else {
             for (var i = 0; i < Main2Controller.productsOnLaunch.size(); i++) {
                 ProductTile productTile = new ProductTile(Main2Controller.productsOnLaunch.get(i).getProductName());
+
+                productTile.setProductID(Main2Controller.productsOnLaunch.get(i).getProductID());
 
                 flowPane.getChildren().add(productTile.asPane());
             }
