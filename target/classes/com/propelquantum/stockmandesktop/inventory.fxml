@@ -12,11 +12,6 @@
    <children>
       <AnchorPane layoutX="33.0" layoutY="23.0" prefHeight="100.0" prefWidth="1100.0" styleClass="primary-violet" stylesheets="@css/style.css" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="23.0">
          <children>
-            <JFXButton layoutX="39.0" layoutY="30.0" onAction="#onAddResupplyButtonClicked" prefHeight="40.0" prefWidth="122.0" styleClass="navigation-button" stylesheets="@css/style.css" text="Resupply" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="30.0">
-               <font>
-                  <Font name="Articulate" size="15.0" />
-               </font>
-            </JFXButton>
             <JFXButton layoutX="700.0" layoutY="30.0" onAction="#onSearchButtonClicked" prefHeight="40.0" prefWidth="122.0" styleClass="navigation-button" stylesheets="@css/style.css" text="Search" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="700.0" AnchorPane.topAnchor="30.0">
                <font>
                   <Font name="Articulate" size="15.0" />
@@ -29,7 +24,7 @@
             </TextField>
          </children>
       </AnchorPane>
-      <FlowPane layoutX="33.0" layoutY="149.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="149.0" />
+      <FlowPane fx:id="flowPane" layoutX="33.0" layoutY="149.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="149.0" />
    </children>
 </AnchorPane>
 
