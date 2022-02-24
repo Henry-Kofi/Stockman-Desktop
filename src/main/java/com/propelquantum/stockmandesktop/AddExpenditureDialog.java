@@ -93,6 +93,5 @@ public class AddExpenditureDialog {
         stage.setTitle("Make an expense");
         stage.setScene(scene);
         stage.showAndWait();
-
     }
 }

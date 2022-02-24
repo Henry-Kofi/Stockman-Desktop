@@ -81,8 +81,5 @@ public class AddCustomerDialog {
         stage.setTitle("Add a customer");
         stage.setScene(scene);
         stage.showAndWait();
-
-
-
     }
 }
