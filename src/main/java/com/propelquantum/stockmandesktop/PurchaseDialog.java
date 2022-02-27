@@ -70,12 +70,16 @@ public class PurchaseDialog {
             for (Customer customer : Main2Controller.totalCustomers) {
                 if (customerName.getValue().equals(customer.getCustomerName())) {
                     if (customerTelephone.getValue().equals(customer.getTelephone())) {
-                        Utility.informationDisplay("Purchase Made!", null, "Successful Purchase");
+
                     } else {
                         Utility.showAlert(Alert.AlertType.ERROR, null, "Purchase Failure!", "The customer with the selected telephone number cannot be found. Add the customer if you haven't.");
                         return;
                     }
                 }
+            }
+
+            if (Utility.updateQuantityInStock(-quantity)) {
+                Utility.informationDisplay("Purchased made", null, "Purchase in progress");
             }
 
             stage.close();

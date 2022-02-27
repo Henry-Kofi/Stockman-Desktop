@@ -199,6 +199,33 @@ public class Utility {
         return quantity;
     }
 
+    public static double getProductPriceFromDatabase(final int productID) {
+        double price = 0.0;
+
+        try(Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(Utility.SEARCH_ALL_PRODUCT_QUERY)) {
+
+
+            while (resultSet.next()) {
+
+                if (productID == resultSet.getInt("productID")) {
+                    System.out.println("Utility check of product id: " + productID);
+
+                    price = resultSet.getDouble("pricePerUnit");
+                }
+            }
+
+
+        } catch(SQLException e) {
+            printSQLException(e);
+        }
+
+        System.out.println("The price is " + price);
+
+        return price;
+    }
+
     public static void informationDisplay(final String message, final String header, final String title) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 
