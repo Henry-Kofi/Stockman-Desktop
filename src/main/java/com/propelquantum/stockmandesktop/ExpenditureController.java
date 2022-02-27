@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -65,5 +66,24 @@ public class ExpenditureController implements Initializable {
     }
 
     public void onSearchButtonClicked(ActionEvent actionEvent) {
+        String searchedExpenditureName = searchTextField.getText();
+
+        if (searchTextField.getText().isEmpty()) {
+            Utility.showAlert(Alert.AlertType.ERROR, null, "Error", "Search bar is empty!");
+
+            tableView.getItems().setAll(expenditures);
+
+            return;
+        }
+
+        ObservableList<Expenditure> filteredExpenditure = FXCollections.observableArrayList();
+
+        for (Expenditure expenditure : expenditures) {
+            if (expenditure.getExpenses().equals(searchedExpenditureName)) {
+                filteredExpenditure.add(expenditure);
+            }
+        }
+
+        tableView.getItems().setAll(filteredExpenditure);
     }
 }
