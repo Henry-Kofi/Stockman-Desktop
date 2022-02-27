@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -68,5 +69,24 @@ public class ProductController implements Initializable {
     }
 
     public void onSearchButtonClicked(ActionEvent actionEvent) {
+        String searchedProductName = searchTextField.getText();
+
+        if (searchTextField.getText().isEmpty()) {
+            Utility.showAlert(Alert.AlertType.ERROR, null, "Error", "Search bar is empty!");
+
+            tableView.getItems().setAll(products);
+
+            return;
+        }
+
+        ObservableList<Product> filteredProduct = FXCollections.observableArrayList();
+
+        for (Product product : products) {
+            if (product.getProductName().equals(searchedProductName)) {
+                filteredProduct.add(product);
+            }
+        }
+
+        tableView.getItems().setAll(filteredProduct);
     }
 }
