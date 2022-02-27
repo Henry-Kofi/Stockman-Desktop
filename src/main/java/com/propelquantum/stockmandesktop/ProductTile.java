@@ -41,7 +41,14 @@ public class ProductTile {
             ResupplyDialog.show();
             id = this.getProductID();
 
-            System.out.println("id is " + id);
+            System.out.println("id while resupplying is " + id);
+        });
+
+        purchaseButton.setOnAction(e -> {
+            PurchaseDialog.show();
+            id = this.getProductID();
+
+            System.out.println("id while purchasing is " + id);
         });
 
         vBox.setMinSize(250, 200);

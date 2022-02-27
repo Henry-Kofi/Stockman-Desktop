@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 public class Main2Controller implements Initializable {
     public BorderPane borderPane;
     public static ObservableList<Product> productsOnLaunch = FXCollections.observableArrayList();
+    public static ObservableList<Customer> totalCustomers = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -43,6 +44,27 @@ public class Main2Controller implements Initializable {
                 product.setTotalAmount();
 
                 productsOnLaunch.add(product);
+            }
+
+        } catch (SQLException e) {
+            Utility.printSQLException(e);
+        }
+
+        try(Connection connection = DriverManager.getConnection(Utility.DATABASE_URL, Utility.DATABASE_USERNAME, Utility.DATABASE_PASSWORD);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(Utility.SEARCH_ALL_CUSTOMER_QUERY)) {
+
+            while (resultSet.next()) {
+                Customer customer = new Customer();
+
+                customer.setCustomerID(resultSet.getInt("customerID"));
+                customer.setCustomerName(resultSet.getString("fullName"));
+                customer.setLocationOrCompanyName(resultSet.getString("locationOrCompany"));
+                customer.setTotalAmountPurchased(resultSet.getDouble("totalAmountPurchased"));
+                customer.setLastPurchasedDate(resultSet.getString("lastPurchasedDate"));
+                customer.setTelephone(resultSet.getString("telephone"));
+
+                totalCustomers.add(customer);
             }
 
         } catch (SQLException e) {

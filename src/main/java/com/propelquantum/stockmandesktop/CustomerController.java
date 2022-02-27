@@ -59,6 +59,9 @@ public class CustomerController implements Initializable {
             Utility.printSQLException(e);
         }
 
+        Main2Controller.totalCustomers.clear();
+        Main2Controller.totalCustomers = customers;
+
         tableView.getItems().setAll(customers);
     }
 
