@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -70,6 +71,25 @@ public class CustomerController implements Initializable {
     }
 
     public void onSearchButtonClicked(ActionEvent actionEvent) {
+        String searchedCustomerName = searchTextField.getText();
+
+        if (searchTextField.getText().isEmpty()) {
+            Utility.showAlert(Alert.AlertType.ERROR, null, "Error", "Search bar is empty!");
+
+            tableView.getItems().setAll(customers);
+
+            return;
+        }
+
+        ObservableList<Customer> filteredCustomer = FXCollections.observableArrayList();
+
+        for (Customer customer : customers) {
+            if (customer.getCustomerName().equals(searchedCustomerName)) {
+                filteredCustomer.add(customer);
+            }
+        }
+
+        tableView.getItems().setAll(filteredCustomer);
     }
 
 
