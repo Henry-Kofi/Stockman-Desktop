@@ -12,6 +12,8 @@ public class ProductTile {
     private final Pane pane;
     private int productID = 0;
 
+    public static int id = 0;
+
     ProductTile(String nameOfProduct) {
         Label productName = new Label(nameOfProduct);
         JFXButton purchaseButton = new JFXButton("Purchase");
@@ -39,12 +41,16 @@ public class ProductTile {
             ResupplyDialog.show();
             productID = this.getProductID();
 
+            id = productID;
+
             System.out.println("id while resupplying is " + productID);
         });
 
         purchaseButton.setOnAction(e -> {
             PurchaseDialog.show();
             productID = this.getProductID();
+
+            id = productID;
 
             System.out.println("id while purchasing is " + productID);
         });

@@ -22,6 +22,7 @@ public class Utility {
     public static final String INSERT_SUPPLIER_UPDATE = "INSERT INTO stockman.supplier(`supplierName`, `location`, `productsSupplied`, `pricePerUnit`, `telephone`) VALUES (?, ?, ?, ?, ?)";
 
     public static final String UPDATE_QUANTITY_IN_STOCK = "UPDATE stockman.product SET `quantityInStock` = ? WHERE (`productID` = ?)";
+    public static final String UPDATE_PURCHASE_DATE_OF_CUSTOMER = "UPDATE stockman.customer SET `lastPurchasedDate` = ? WHERE (`customerID` = ?)";
 
     public static User loggedInUser = new User();
 
@@ -138,6 +139,27 @@ public class Utility {
             preparedStatement.setString(3, supplier.getProductsSupplied());
             preparedStatement.setDouble(4, supplier.getPricePerUnit());
             preparedStatement.setString(5, supplier.getTelephone());
+
+            // debug
+            System.out.println(preparedStatement);
+
+            preparedStatement.executeUpdate();
+
+            return true;
+
+        } catch(SQLException e) {
+            printSQLException(e);
+        }
+
+        return false;
+    }
+
+    public static boolean updateCustomerLastPurchaseDate(final String lastPurchasedDate, final int customerID) {
+        try(Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PURCHASE_DATE_OF_CUSTOMER)) {
+
+            preparedStatement.setString(1, lastPurchasedDate);
+            preparedStatement.setInt(2, customerID);
 
             // debug
             System.out.println(preparedStatement);

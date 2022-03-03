@@ -10,8 +10,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 public class PurchaseDialog {
     private static int quantity;
+    private static int customerID;
 
     public static void show() {
         Stage stage = new Stage();
@@ -23,19 +28,22 @@ public class PurchaseDialog {
         quantityToPurchase.setMinHeight(30);
 
         ComboBox<String> customerName = new ComboBox<>();
+        ComboBox<String> customerTelephone = new ComboBox<>();
 
-        for (Customer customer : Main2Controller.totalCustomers) {
-            customerName.getItems().add(customer.getCustomerName());
+        if (CustomerController.customers.size() >= Main2Controller.totalCustomers.size()) {
+            for (Customer customer : CustomerController.customers) {
+                customerName.getItems().add(customer.getCustomerName());
+                customerTelephone.getItems().add(customer.getTelephone());
+            }
+        } else {
+            for (Customer customer : Main2Controller.totalCustomers) {
+                customerName.getItems().add(customer.getCustomerName());
+                customerTelephone.getItems().add(customer.getTelephone());
+            }
         }
 
         customerName.setMinHeight(30);
         customerName.setPromptText("Pick Customer's name");
-
-        ComboBox<String> customerTelephone = new ComboBox<>();
-
-        for (Customer customer : Main2Controller.totalCustomers) {
-            customerTelephone.getItems().add(customer.getTelephone());
-        }
 
         customerTelephone.setMinHeight(30);
         customerTelephone.setPromptText("Pick Customer's telephone");
@@ -75,11 +83,22 @@ public class PurchaseDialog {
                         Utility.showAlert(Alert.AlertType.ERROR, null, "Purchase Failure!", "The customer with the selected telephone number cannot be found. Add the customer if you haven't.");
                         return;
                     }
+
+                    customerID = customer.getCustomerID();
                 }
             }
 
-            if (Utility.updateQuantityInStock(-quantity)) {
-                Utility.informationDisplay("Purchased made", null, "Purchase in progress");
+            System.out.println("Customer ID is " + customerID);
+
+            String date = LocalDate.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+
+            if (quantity > Utility.getQuantityInStockFromDatabase(ProductTile.id)) {
+                Utility.showAlert(Alert.AlertType.ERROR, null, "Purchase Failure!", "Quantity in Stock not enough to complete purchase");
+                return;
+            } else {
+                if (Utility.updateQuantityInStock(-quantity) && Utility.updateCustomerLastPurchaseDate(date, customerID)); {
+                    Utility.informationDisplay("Purchased made", null, "Purchase in progress");
+                }
             }
 
             stage.close();

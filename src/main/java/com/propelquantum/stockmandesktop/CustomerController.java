@@ -30,6 +30,7 @@ public class CustomerController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+        System.out.println("Total customers before: " + customers.size());
         customers.clear();
 
         idTableColumn.setCellValueFactory(cellData -> cellData.getValue().customerID());
@@ -59,9 +60,6 @@ public class CustomerController implements Initializable {
         } catch (SQLException e) {
             Utility.printSQLException(e);
         }
-
-        Main2Controller.totalCustomers.clear();
-        Main2Controller.totalCustomers = customers;
 
         tableView.getItems().setAll(customers);
     }
