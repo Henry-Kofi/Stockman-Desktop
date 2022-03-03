@@ -12,8 +12,6 @@ public class ProductTile {
     private final Pane pane;
     private int productID = 0;
 
-    public static int id = 0;
-
     ProductTile(String nameOfProduct) {
         Label productName = new Label(nameOfProduct);
         JFXButton purchaseButton = new JFXButton("Purchase");
@@ -39,16 +37,16 @@ public class ProductTile {
 
         resupplyButton.setOnAction(e -> {
             ResupplyDialog.show();
-            id = this.getProductID();
+            productID = this.getProductID();
 
-            System.out.println("id while resupplying is " + id);
+            System.out.println("id while resupplying is " + productID);
         });
 
         purchaseButton.setOnAction(e -> {
             PurchaseDialog.show();
-            id = this.getProductID();
+            productID = this.getProductID();
 
-            System.out.println("id while purchasing is " + id);
+            System.out.println("id while purchasing is " + productID);
         });
 
         vBox.setMinSize(250, 200);
