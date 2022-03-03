@@ -96,7 +96,7 @@ public class PurchaseDialog {
                 Utility.showAlert(Alert.AlertType.ERROR, null, "Purchase Failure!", "Quantity in Stock not enough to complete purchase");
                 return;
             } else {
-                if (Utility.updateQuantityInStock(-quantity) && Utility.updateCustomerLastPurchaseDate(date, customerID)); {
+                if (Utility.updateQuantityInStock(-quantity) && Utility.updateCustomerLastPurchaseDate(date, customerID) && Utility.updateCustomerTotalAmount(quantity, ProductTile.id, customerID)); {
                     Utility.informationDisplay("Purchased made", null, "Purchase in progress");
                 }
             }

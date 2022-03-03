@@ -23,6 +23,7 @@ public class Utility {
 
     public static final String UPDATE_QUANTITY_IN_STOCK = "UPDATE stockman.product SET `quantityInStock` = ? WHERE (`productID` = ?)";
     public static final String UPDATE_PURCHASE_DATE_OF_CUSTOMER = "UPDATE stockman.customer SET `lastPurchasedDate` = ? WHERE (`customerID` = ?)";
+    public static final String UPDATE_TOTAL_AMOUNT_OF_CUSTOMER = "UPDATE stockman.customer SET `totalAmountPurchased` = ? WHERE (`customerID` = ?)";
 
     public static User loggedInUser = new User();
 
@@ -175,6 +176,29 @@ public class Utility {
         return false;
     }
 
+    public static boolean updateCustomerTotalAmount(final int quantity, final int productID,final int customerID) {
+        try(Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_TOTAL_AMOUNT_OF_CUSTOMER)) {
+
+            double amount = getCustomerTotalAmountFromDatabase(customerID) + (quantity * getProductPriceFromDatabase(productID));
+
+            preparedStatement.setDouble(1, amount);
+            preparedStatement.setInt(2, customerID);
+
+            // debug
+            System.out.println(preparedStatement);
+
+            preparedStatement.executeUpdate();
+
+            return true;
+
+        } catch(SQLException e) {
+            printSQLException(e);
+        }
+
+        return false;
+    }
+
     public static boolean updateQuantityInStock(int quantity) {
         try(Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUANTITY_IN_STOCK)) {
@@ -196,6 +220,29 @@ public class Utility {
         }
 
         return false;
+    }
+
+    public static double getCustomerTotalAmountFromDatabase(final int customerID) {
+        double amount = 0.0;
+
+        try(Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(Utility.SEARCH_ALL_CUSTOMER_QUERY)) {
+
+
+            while (resultSet.next()) {
+
+                if (customerID == resultSet.getInt("customerID")) {
+                    amount = resultSet.getDouble("totalAmountPurchased");
+                }
+            }
+
+
+        } catch(SQLException e) {
+            printSQLException(e);
+        }
+
+        return amount;
     }
 
     public static int getQuantityInStockFromDatabase(final int productID) {
