@@ -41,7 +41,10 @@ public class LoginController {
         String username = usernameTextField.getText();
         String password = passwordField.getText();
 
-        flag = Utility.validateLoginCredentials(username, password);
+        // flag = Utility.validateLoginCredentials(username, password);
+
+        // debug mode - database unavailable
+        flag = true;
 
         if (!flag) {
             Utility.informationDisplay("Please enter a correct username and a password", null, "Login failed");
