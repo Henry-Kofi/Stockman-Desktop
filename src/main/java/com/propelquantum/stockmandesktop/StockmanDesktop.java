@@ -11,7 +11,7 @@ public class StockmanDesktop extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(StockmanDesktop.class.getResource("login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        Scene scene = new Scene(fxmlLoader.load(), 1366, 768);
         stage.setTitle("Stockman Desktop");
         stage.setScene(scene);
         stage.show();
